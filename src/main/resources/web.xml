@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <import resource="classpath:spring.xml"/>
+
+    <!--配置包扫描器，将带有特殊注解的类全部放进ioc容器管理-->
+    <context:component-scan base-package="com.fms"/>
+
+    <!--这个配置会让请求不走DispatcherServlet，允许访问静态资源-->
+    <mvc:default-servlet-handler/>
+    <!--启用mvc注解驱动，与上面的那个配合使用-->
+    <mvc:annotation-driven/>
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/users/addUser"/>
+            <mvc:exclude-mapping path="/users/login"/>
+            <ref bean="JWTCheckInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+
+
+</beans>
