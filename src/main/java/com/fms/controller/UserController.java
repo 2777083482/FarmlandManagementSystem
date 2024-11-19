@@ -1,6 +1,6 @@
 package com.fms.controller;
 
-import com.context.BaseContext;
+import com.fms.context.BaseContext;
 import com.fms.constant.CommonConstant;
 import com.fms.constant.JWTConstant;
 import com.fms.pojo.dto.UserAddDo;
@@ -16,9 +16,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.crypto.SecretKey;
-import javax.crypto.spec.SecretKeySpec;
-import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;

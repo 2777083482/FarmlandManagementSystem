@@ -1,19 +1,15 @@
 package com.fms.interceptor;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.context.BaseContext;
-import com.fms.Exception.AutoFillException;
+import com.fms.context.BaseContext;
 import com.fms.constant.JWTConstant;
 import com.fms.util.JwtUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.plugin.Intercepts;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
-
-import java.util.Map;
 
 @Component("JWTCheckInterceptor")
 @Slf4j
