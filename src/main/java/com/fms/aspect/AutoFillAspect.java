@@ -1,6 +1,6 @@
 package com.fms.aspect;
 
-import com.fms.Exception.AutoFillException;
+import com.fms.exception.AutoFillException;
 import com.fms.annotation.AutoFill;
 import com.fms.constant.AutoFillConstant;
 import com.fms.enumeration.OperationType;

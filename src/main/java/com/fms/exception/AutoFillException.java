@@ -1,4 +1,4 @@
-package com.fms.Exception;
+package com.fms.exception;
 
 public class AutoFillException extends BaseException{
     public AutoFillException() {
