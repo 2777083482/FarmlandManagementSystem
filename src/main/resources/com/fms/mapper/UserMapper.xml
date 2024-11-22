@@ -5,13 +5,13 @@
 <mapper namespace="com.fms.mapper.UserMapper">
   <update id="updateUser">
       update users set
-      <if test="password != null">
+      <if test="password != null and password != ''">
           password = #{password},
       </if>
-      <if test="email != null">
+      <if test="email != null and email != ''">
           email = #{email},
       </if>
-      <if test="phone != null">
+      <if test="phone != null and phone != ''">
           phone = #{phone},
       </if>
       <if test="updateTime != null">

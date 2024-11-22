@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fms.mapper.FieldMapper">
+
+  <update id="updateField">
+    update fields
+    <set>
+      <if test="name != null and name != ''">
+        name = #{name},
+      </if>
+      <if test="area != null">
+        area = #{area},
+      </if>
+      <if test="location != null and location != ''">
+        location = #{location},
+      </if>
+      <if test="soilType != null and soilType != ''">
+        soil_type = #{soilType},
+      </if>
+      <if test="cropType != null and cropType != ''">
+        crop_type = #{cropType},
+      </if>
+      <if test="plantingDate != null and plantingDate != ''">
+        planting_date = #{plantingDate},
+      </if>
+      <if test="harvestDate != null and harvestDate != ''">
+        harvest_date = #{harvestDate},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime}
+      </if>
+    </set>
+    <where>
+      field_id = #{fieldId}
+      <if test="userId != null">
+        and user_id = #{userId}
+      </if>
+    </where>
+  </update>
+
+</mapper>

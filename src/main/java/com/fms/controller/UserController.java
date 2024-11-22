@@ -1,5 +1,6 @@
 package com.fms.controller;
 
+import com.fms.annotation.UserIdCheck;
 import com.fms.context.BaseContext;
 import com.fms.constant.CommonConstant;
 import com.fms.constant.JWTConstant;
@@ -11,6 +12,7 @@ import com.fms.pojo.vo.UserLoginVo;
 import com.fms.result.Result;
 import com.fms.service.UserService;
 import com.fms.util.JwtUtil;
+import com.fms.util.ThreadUserIdUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,18 +62,16 @@ public class UserController {
 
     // 更新用户
     @PutMapping("/updateUser")
+    @UserIdCheck
     public Result updateUser(@RequestBody UserPutDo userPutDo) {
         log.info("更新用户，用户信息：{}",userPutDo.toString());
-        Integer threadUserId = BaseContext.getCurrentId();
-        if (!Objects.equals(threadUserId, userPutDo.getUserId())) {
-            return Result.error(CommonConstant.USERID_ONT_MATCHED);
-        }
         userService.updateUser(userPutDo);
         return Result.success();
     }
 
     // 删除用户
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/deleteUser/{id}")
+    //TODO 农田关联的外键没有处理
     public Result deleteUser(@PathVariable("id") Integer userId) {
         log.info("删除用户，id为{}",userId);
         Integer threadUserId = BaseContext.getCurrentId();

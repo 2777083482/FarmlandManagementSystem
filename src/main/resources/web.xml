@@ -20,9 +20,11 @@
             <mvc:mapping path="/**"/>
             <mvc:exclude-mapping path="/users/addUser"/>
             <mvc:exclude-mapping path="/users/login"/>
+            <mvc:exclude-mapping path="/test"/>
             <ref bean="JWTCheckInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
+
 
 
 

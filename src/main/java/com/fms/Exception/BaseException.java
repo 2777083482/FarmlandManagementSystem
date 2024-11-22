@@ -1,8 +1,11 @@
 package com.fms.Exception;
 
 public class BaseException extends RuntimeException{
-    public BaseException(Throwable cause) {
-        super(cause);
+    public BaseException() {
+    }
+
+    public BaseException(String message) {
+        super(message);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.fms.Aspect;
+package com.fms.aspect;
 
 import com.fms.Exception.AutoFillException;
 import com.fms.annotation.AutoFill;
@@ -12,10 +12,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.time.Instant;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Aspect
@@ -57,7 +54,7 @@ public class AutoFillAspect {
             //执行自动装配
             setUpdatteTimeMethod.invoke(entity, now);
         } catch (Exception e) {
-            throw new AutoFillException(e);
+            throw new AutoFillException(e.getMessage());
         }
     }
 
@@ -76,7 +73,7 @@ public class AutoFillAspect {
             setUpdatteTimeMethod.invoke(entity, now);
             setCreateTimeMethod.invoke(entity, now);
         } catch (Exception e) {
-            throw new AutoFillException(e);
+            throw new AutoFillException(e.getMessage());
         }
     }
 
