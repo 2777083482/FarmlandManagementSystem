@@ -19,15 +19,6 @@
       <if test="soilType != null and soilType != ''">
         soil_type = #{soilType},
       </if>
-      <if test="cropType != null and cropType != ''">
-        crop_type = #{cropType},
-      </if>
-      <if test="plantingDate != null and plantingDate != ''">
-        planting_date = #{plantingDate},
-      </if>
-      <if test="harvestDate != null and harvestDate != ''">
-        harvest_date = #{harvestDate},
-      </if>
       <if test="updateTime != null">
         update_time = #{updateTime}
       </if>

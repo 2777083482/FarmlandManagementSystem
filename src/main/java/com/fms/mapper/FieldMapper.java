@@ -12,11 +12,11 @@ import java.util.List;
 public interface FieldMapper {
     // 根据用户ID获取农田列表
     @Select("SELECT * FROM fields WHERE user_id = #{userId}")
-    List<Field> findFieldsByUserId(@Param("userId") int userId);
+    List<Field> findFieldsByUserId(@Param("userId") Integer userId);
 
     // 添加农田
-    @Insert("INSERT INTO fields (name, area, location, soil_type, crop_type, planting_date, harvest_date, user_id,create_time,update_time) " +
-            "VALUES (#{name}, #{area}, #{location}, #{soilType}, #{cropType}, #{plantingDate}, #{harvestDate}, #{userId}, #{createTime},#{updateTime})")
+    @Insert("INSERT INTO fields (name, area, location, soil_type, user_id,create_time,update_time) " +
+            "VALUES (#{name}, #{area}, #{location}, #{soilType},#{userId}, #{createTime},#{updateTime})")
     @AutoFill(OperationType.INSERT)
     void insertField(FieldAddDo fieldAddDo);
 
@@ -26,6 +26,6 @@ public interface FieldMapper {
 
     // 删除农田
     @Delete("DELETE FROM fields WHERE field_id = #{fieldId} AND user_id = #{userId}")
-    void deleteField(@Param("fieldId") int fieldId, @Param("userId") int userId);
+    void deleteField(@Param("fieldId") Integer fieldId, @Param("userId") Integer userId);
 }
 

@@ -16,7 +16,7 @@ public interface UserMapper {
 
     // 插入用户
     @Insert("INSERT INTO users (username, password, email, phone, create_time, update_time) " +
-            "VALUES (#{username}, #{password}, #{email}, #{phone}, #{createTime}, #{updateTime},#{create})")
+            "VALUES (#{username}, #{password}, #{email}, #{phone}, #{createTime}, #{updateTime})")
     @AutoFill(OperationType.INSERT)
     void insertUser(UserAddDo userAddDo);
 

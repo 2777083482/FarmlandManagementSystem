@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fms.mapper.CropMapper">
+  <update id="updateCrop">
+    update crops 
+    <set>
+      <if test="cropName != null and cropName != ''">
+        crop_name = #{cropName},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime}
+      </if>
+    </set>
+    <where>
+      crop_id = #{cropId}
+      <if test="userId != null">
+        and user_id = #{userId}
+      </if>
+    </where>
+  </update>
+</mapper>

@@ -7,9 +7,9 @@ import com.fms.pojo.entity.Field;
 import java.util.List;
 
 public interface FieldService {
-    List<Field> getFieldsByUserId(int userId);
+    List<Field> getFieldsByUserId(Integer userId);
     void addField(FieldAddDo fieldAddDo);
     void updateField(FieldPutDo fieldPutDo);
-    void deleteField(int fieldId, int userId);
+    void deleteField(Integer fieldId, Integer userId);
 }
 

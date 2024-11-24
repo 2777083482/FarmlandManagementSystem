@@ -16,7 +16,7 @@ public class FieldServiceImpl implements FieldService {
     private FieldMapper fieldMapper;
 
     @Override
-    public List<Field> getFieldsByUserId(int userId) {
+    public List<Field> getFieldsByUserId(Integer userId) {
         return fieldMapper.findFieldsByUserId(userId);
     }
 
@@ -31,7 +31,7 @@ public class FieldServiceImpl implements FieldService {
     }
 
     @Override
-    public void deleteField(int fieldId, int userId) {
+    public void deleteField(Integer fieldId, Integer userId) {
         fieldMapper.deleteField(fieldId, userId);
     }
 }
