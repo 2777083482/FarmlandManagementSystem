@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fms.mapper.PlantingMapper">
+  <update id="updatePlanting" parameterType="com.fms.pojo.dto.PlantingPutDo">
+    update plantings
+    <set>
+      <if test="growthStatus != null and growthStatus != ''">
+        growth_status = #{growthStatus},
+      </if>
+      <if test="plantingDate != null">
+        planting_date = #{plantingDate},
+      </if>
+      <if test="harvestDate != null">
+        harvest_date = #{harvestDate},
+      </if>
+      update_time = #{updateTime}
+    </set>
+    <where>
+      id = #{id}
+    </where>
+  </update>
+</mapper>
