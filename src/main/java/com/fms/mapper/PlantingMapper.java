@@ -13,7 +13,11 @@ import java.util.List;
 public interface PlantingMapper {
 
     // 查询某农田的种植信息
-    @Select("SELECT p.*,f.name,c.crop_name FROM fields f join (plantings p join crops c on p.crop_id = c.crop_id) on f.field_id = p.field_id where f.field_id = #{fieldId}")
+    @Select("SELECT p.*,f.name,c.crop_name " +
+            "FROM fields f " +
+            "join (plantings p join crops c on p.crop_id = c.crop_id) " +
+            "on f.field_id = p.field_id " +
+            "where f.field_id = #{fieldId}")
     @Results({
             @Result(id = true, column = "id", property = "id"),
             @Result(column = "name", property = "fieldName"),
@@ -23,7 +27,11 @@ public interface PlantingMapper {
     List<PlantingAllVo> findByFieldId(@Param("fieldId") Integer fieldId);
 
     // 查询某作物的种植信息
-    @Select("SELECT p.*,f.name,c.crop_name FROM fields f join (plantings p join crops c on p.crop_id = c.crop_id) on f.field_id = p.field_id WHERE c.crop_id = #{cropId}")
+    @Select("SELECT p.*,f.name,c.crop_name " +
+            "FROM fields f " +
+            "join (plantings p join crops c on p.crop_id = c.crop_id) " +
+            "on f.field_id = p.field_id " +
+            "WHERE c.crop_id = #{cropId}")
     @Results({
             @Result(id = true, column = "id", property = "id"),
             @Result(column = "name", property = "fieldName"),
