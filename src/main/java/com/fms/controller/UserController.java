@@ -71,7 +71,6 @@ public class UserController {
 
     // 删除用户
     @DeleteMapping("/deleteUser/{id}")
-    //TODO 农田关联的外键没有处理
     public Result deleteUser(@PathVariable("id") Integer userId) {
         log.info("删除用户，id为{}",userId);
         Integer threadUserId = BaseContext.getCurrentId();

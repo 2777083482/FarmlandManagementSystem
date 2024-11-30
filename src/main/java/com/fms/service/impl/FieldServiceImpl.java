@@ -1,12 +1,15 @@
 package com.fms.service.impl;
 
 import com.fms.mapper.FieldMapper;
+import com.fms.mapper.PlantingMapper;
 import com.fms.pojo.dto.FieldAddDo;
 import com.fms.pojo.dto.FieldPutDo;
 import com.fms.pojo.entity.Field;
+import com.fms.pojo.vo.PlantingAllVo;
 import com.fms.service.FieldService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -15,6 +18,8 @@ public class FieldServiceImpl implements FieldService {
     @Autowired
     private FieldMapper fieldMapper;
 
+    @Autowired
+    private PlantingMapper plantingMapper;
     @Override
     public List<Field> getFieldsByUserId(Integer userId) {
         return fieldMapper.findFieldsByUserId(userId);
@@ -31,7 +36,14 @@ public class FieldServiceImpl implements FieldService {
     }
 
     @Override
+    @Transactional
     public void deleteField(Integer fieldId, Integer userId) {
+        List<PlantingAllVo> plantings = plantingMapper.findByFieldId(fieldId);
+        if (plantings != null) {
+            for (PlantingAllVo planting : plantings) {
+                plantingMapper.deletePlanting(planting.getId());
+            }
+        }
         fieldMapper.deleteField(fieldId, userId);
     }
 }

@@ -1,12 +1,15 @@
 package com.fms.service.impl;
 
 import com.fms.mapper.CropMapper;
+import com.fms.mapper.PlantingMapper;
 import com.fms.pojo.dto.CropAddDo;
 import com.fms.pojo.dto.CropPutDo;
 import com.fms.pojo.entity.Crop;
+import com.fms.pojo.vo.PlantingAllVo;
 import com.fms.service.CropService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -19,6 +22,9 @@ public class CropServiceImpl implements CropService {
 
     @Autowired
     private CropMapper cropMapper;
+
+    @Autowired
+    private PlantingMapper plantingMapper;
 
     //获取所有作物信息
     @Override
@@ -46,7 +52,14 @@ public class CropServiceImpl implements CropService {
 
     //删除作物信息
     @Override
+    @Transactional
     public void deleteCrop(Integer cropId,Integer userId) {
+        List<PlantingAllVo> plantings = plantingMapper.findByCropId(cropId);
+        if (plantings != null) {
+            for (PlantingAllVo planting : plantings) {
+                plantingMapper.deletePlanting(planting.getId());
+            }
+        }
         cropMapper.deleteCrop(cropId,userId);
     }
 }
