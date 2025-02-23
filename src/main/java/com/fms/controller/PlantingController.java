@@ -26,6 +26,23 @@ public class PlantingController {
         List<PlantingAllVo> plantings = plantingService.getPlantingsByFieldId(fieldId);
         return Result.success(plantings);
     }
+    // 根据用户id获取种植记录
+    @GetMapping("/planting/user/{userId}")
+    public Result<List<PlantingAllVo>> getPlantingsByUserId(@PathVariable("userId") Integer userId) {
+        log.info("查询id为{}的用户的种植记录",userId);
+        List<PlantingAllVo> plantings = plantingService.getPlantingsByUserId(userId);
+        return Result.success(plantings);
+    }
+
+    // 根据农田id和作物id精确查找种植id
+    @GetMapping("/planting/{fieldId}/{cropId}")
+    public Result<Planting> getPlantingByFieldIdAndCropId(
+            @PathVariable("fieldId") Integer fieldId,
+            @PathVariable("cropId") Integer cropId
+    ) {
+        Planting planting = plantingService.getPlantingByFieldIdAndCropId(fieldId,cropId) ;
+        return Result.success(planting);
+    }
 
     // 获取某作物的种植信息
     @GetMapping("/crop/{cropId}")
@@ -58,5 +75,6 @@ public class PlantingController {
         plantingService.deletePlanting(id);
         return Result.success();
     }
+
 }
 

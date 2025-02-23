@@ -1,6 +1,7 @@
 package com.fms.controller;
 import com.fms.pojo.dto.IrrigationRecordAddDo;
 import com.fms.pojo.dto.IrrigationRecordPutDo;
+import com.fms.pojo.entity.FertilizerRecord;
 import com.fms.pojo.entity.IrrigationRecord;
 import com.fms.result.Result;
 import com.fms.service.IrrigationRecordService;
@@ -23,6 +24,14 @@ public class IrrigationRecordController {
     public Result<List<IrrigationRecord>> getIrrigationRecordsByPlantingsId(@PathVariable("plantingsId") Integer plantingsId) {
         log.info("查询种植记录ID {} 的灌溉信息", plantingsId);
         List<IrrigationRecord> records = irrigationRecordService.getIrrigationRecordsByPlantingsId(plantingsId);
+        return Result.success(records);
+    }
+
+    // 获取某个用户的今天的灌溉记录
+    @GetMapping("/irrigation/today/{userId}")
+    public Result<List<IrrigationRecord>> getTodayIrrigationRecordsByUserId(@PathVariable("userId") Integer userId) {
+        log.info("查询用户ID {} 的灌溉信息", userId);
+        List<IrrigationRecord> records = irrigationRecordService.getTodayIrrigationRecordsByUserId(userId);
         return Result.success(records);
     }
 

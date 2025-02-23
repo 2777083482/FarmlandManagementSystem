@@ -56,11 +56,9 @@ public class CropController {
     }
 
     // 更新作物
-    @PutMapping("/updateCrop/{id}")
-    @UserIdCheck
-    public Result updateCrop(@PathVariable("id") Integer id, @RequestBody CropPutDo crop) {
-        log.info("更新作物ID {} 信息 -> {}", id, crop);
-        crop.setCropId(id);
+    @PutMapping("/updateCrop")
+    public Result updateCrop(@RequestBody CropPutDo crop) {
+        log.info("更新作物ID {} 信息 -> {}", crop.getCropId());
         cropService.updateCrop(crop);
         return Result.success("作物更新成功");
     }

@@ -11,5 +11,6 @@ public interface IrrigationRecordService {
     void addIrrigationRecord(IrrigationRecordAddDo irrigationRecord);
     void updateIrrigationRecord(IrrigationRecordPutDo irrigationRecord);
     void deleteIrrigationRecord(Integer irrigationId);
+    List<IrrigationRecord> getTodayIrrigationRecordsByUserId(Integer userId);
 }
 

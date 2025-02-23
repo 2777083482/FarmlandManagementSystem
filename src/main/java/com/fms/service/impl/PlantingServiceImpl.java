@@ -6,14 +6,17 @@ import com.fms.mapper.PlantingMapper;
 import com.fms.pojo.dto.PlantingAddDo;
 import com.fms.pojo.dto.PlantingPutDo;
 import com.fms.pojo.entity.FertilizerRecord;
+import com.fms.pojo.entity.Field;
 import com.fms.pojo.entity.IrrigationRecord;
 import com.fms.pojo.entity.Planting;
 import com.fms.pojo.vo.PlantingAllVo;
+import com.fms.service.FieldService;
 import com.fms.service.PlantingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -27,6 +30,9 @@ public class PlantingServiceImpl implements PlantingService {
 
     @Autowired
     private FertilizerRecordMapper fertilizerRecordMapper;
+
+    @Autowired
+    private FieldService fieldService;
 
     // 根据农田ID查询种植信息
     @Override
@@ -69,5 +75,22 @@ public class PlantingServiceImpl implements PlantingService {
             }
         }
         plantingMapper.deletePlanting(id);
+    }
+
+    @Override
+    public Planting getPlantingByFieldIdAndCropId(Integer fieldId, Integer cropId) {
+        Planting planting = plantingMapper.findByFieldIdAndCropId(fieldId,cropId);
+        return planting;
+    }
+
+    @Override
+    public List<PlantingAllVo> getPlantingsByUserId(Integer userId) {
+        List<Field> fields = fieldService.getFieldsByUserId(userId);
+        List<PlantingAllVo> plantingAllVos = new ArrayList<>();
+        for (Field field : fields) {
+            List<PlantingAllVo> plantingsByFieldId = getPlantingsByFieldId(field.getFieldId());
+            plantingAllVos.addAll(plantingsByFieldId);
+        }
+        return plantingAllVos;
     }
 }

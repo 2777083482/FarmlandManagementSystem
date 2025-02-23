@@ -13,4 +13,7 @@ public interface PlantingService {
     void addPlanting(PlantingAddDo planting);
     void updatePlanting(PlantingPutDo planting);
     void deletePlanting(Integer id);
+    Planting getPlantingByFieldIdAndCropId(Integer fieldId, Integer cropId);
+
+    List<PlantingAllVo> getPlantingsByUserId(Integer userId);
 }

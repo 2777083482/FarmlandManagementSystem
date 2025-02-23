@@ -1,5 +1,6 @@
 package com.fms.service.impl;
 
+import com.fms.exception.CommonException;
 import com.fms.mapper.CropMapper;
 import com.fms.mapper.PlantingMapper;
 import com.fms.pojo.dto.CropAddDo;
@@ -47,6 +48,9 @@ public class CropServiceImpl implements CropService {
     //更新作物信息
     @Override
     public void updateCrop(CropPutDo crop) {
+        if (crop.getCropName() == null || crop.getCropName().trim().equals("")){
+            throw new CommonException("作物名称不许为空");
+        }
         cropMapper.updateCrop(crop);
     }
 

@@ -27,6 +27,14 @@ public class FertilizerRecordController {
         return Result.success(records);
     }
 
+    // 获取某个用户的今天的施肥记录
+    @GetMapping("/Fertilizer/today/{userId}")
+    public Result<List<FertilizerRecord>> getTodayFertilizerRecordsByUserId(@PathVariable("userId") Integer userId) {
+        log.info("查询用户ID {} 的施肥信息", userId);
+        List<FertilizerRecord> records = fertilizerRecordService.getTodayFertilizerRecordsByUserId(userId);
+        return Result.success(records);
+    }
+
     @GetMapping("/Fertilizer/{FertilizerId}")
     public Result<List<FertilizerRecord>> getFertilizerRecordsByFertilizerId(@PathVariable("FertilizerId") Integer FertilizerId) {
         log.info("查询施肥ID {} 的施肥信息", FertilizerId);

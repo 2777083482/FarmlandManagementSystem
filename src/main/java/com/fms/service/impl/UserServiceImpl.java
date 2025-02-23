@@ -1,5 +1,8 @@
 package com.fms.service.impl;
 
+import com.fms.constant.CommonConstant;
+import com.fms.exception.UserAddException;
+import com.fms.exception.UserLoginException;
 import com.fms.mapper.*;
 import com.fms.pojo.dto.UserAddDo;
 import com.fms.pojo.dto.UserLoginDo;
@@ -31,7 +34,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void addUser(UserAddDo userAddDo) {
-        userMapper.insertUser(userAddDo);
+        String username = userAddDo.getUsername();
+        String password = userAddDo.getPassword();
+        if (username == null || password == null || username.equals("") || password.equals("")) {
+            throw new UserAddException(CommonConstant.USERNAME_OR_PASSWORD_NULL);
+        }
+        UserLoginDo userLoginDo = new UserLoginDo(username, password);
+        User user = userMapper.loginUser(userLoginDo);
+        if (user != null) {
+            //说明该用户已经被注册过了
+            //报错不允许注册
+            throw new UserAddException(CommonConstant.USER_EXIST);
+        } else {
+            userMapper.insertUser(userAddDo);
+        }
     }
 
     @Override
@@ -59,7 +75,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User loginUser(UserLoginDo userLoginDo) {
-        User user = userMapper.loginUser(userLoginDo);
+        User user = null;
+        try {
+            user = userMapper.loginUser(userLoginDo);
+            if (user == null) {
+                throw new UserLoginException();
+            }
+        } catch (Exception e) {
+            throw new UserLoginException("用户名或密码错误，请重新输入");
+        }
         return user;
     }
 }

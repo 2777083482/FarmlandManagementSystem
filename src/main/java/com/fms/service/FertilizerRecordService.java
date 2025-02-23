@@ -12,5 +12,7 @@ public interface FertilizerRecordService {
     void deleteFertilizerRecord(Integer fertilizerId);
 
     List<FertilizerRecord> getFertilizerRecordsByFertilizerId(Integer fertilizerId);
+
+    List<FertilizerRecord> getTodayFertilizerRecordsByUserId(Integer userId);
 }
 

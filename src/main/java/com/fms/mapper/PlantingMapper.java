@@ -53,4 +53,6 @@ public interface PlantingMapper {
     // 删除种植记录
     @Delete("DELETE FROM plantings WHERE id = #{id}")
     void deletePlanting(@Param("id") Integer id);
+    @Select("select * from plantings where field_id = #{fieldId} and crop_id = #{cropId}")
+    Planting findByFieldIdAndCropId(@Param("fieldId")Integer fieldId,@Param("cropId")Integer cropId);
 }

@@ -1,5 +1,6 @@
 package com.fms.service.impl;
 
+import com.fms.exception.CommonException;
 import com.fms.mapper.FieldMapper;
 import com.fms.mapper.PlantingMapper;
 import com.fms.pojo.dto.FieldAddDo;
@@ -27,11 +28,19 @@ public class FieldServiceImpl implements FieldService {
 
     @Override
     public void addField(FieldAddDo fieldAddDo) {
+        String name = fieldAddDo.getName();
+        if (name == null || name.trim().equals("")) {
+            throw new CommonException("农田名称不许为空");
+        }
         fieldMapper.insertField(fieldAddDo);
     }
 
     @Override
     public void updateField(FieldPutDo fieldPutDo) {
+        String name = fieldPutDo.getName();
+        if (name == null || name.trim().equals("")) {
+            throw new CommonException("农田名称不许为空");
+        }
         fieldMapper.updateField(fieldPutDo);
     }
 
